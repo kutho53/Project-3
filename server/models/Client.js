@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const hourSchema = require('./Hours');
 
 const clientSchema = new Schema(
     {
@@ -6,7 +7,7 @@ const clientSchema = new Schema(
       lastName: {type: String},
       email: {type: String},
       phoneNumber: {type: String},
-      
+      hours: [hourSchema]
     },
     {
         toJSON: {
