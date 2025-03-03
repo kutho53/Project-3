@@ -1,13 +1,13 @@
 // import the gql tagged template function
 const { gql } = require('apollo-server-express');
 
-// create our typeDefs
+// TODO: create our typeDefs
 
-// add type user
-// add type hours
-// update query
-// add mutations
-// add auth
+    // add type user
+    // add type hours
+    // update query
+    // add mutations
+    // add auth
 const typeDefs = gql`
     type Client {
         _id: ID
@@ -17,8 +17,7 @@ const typeDefs = gql`
         phoneNumber: String
     }
     type Query {
-        clients: [Client]
-        client(id:ID!): Client
+        
     }
 `;
 
