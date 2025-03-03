@@ -1,4 +1,4 @@
-const database = require('../connect');
+const database = require('../config/connect');
 const { Client } = require('../models');
 
 const resolvers = {

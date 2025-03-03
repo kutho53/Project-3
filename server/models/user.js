@@ -1,11 +1,19 @@
 const { Schema, model } = require('mongoose');
+const clientSchema = require('./Client');
 
-//add the types and reqirements for User
-// defer to data in database
 
-//import and add Client schema 
 const userSchema = new Schema(
-    {}
+    {
+        _id: {type: String},
+        userName: {type: String},
+        password: {type: String},
+        clients: {clientSchema}
+    },
+    {
+        toJSON: {
+            virtuals: true
+        }
+    }
 );
 
 const User = model('User', userSchema);
