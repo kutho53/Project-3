@@ -1,19 +1,17 @@
-//this page is for creating the react router layout
-import Header from '../components/header.tsx';
-import { Outlet, Link } from "react-router-dom";
+import Header from '../components/header';
+import { Outlet } from "react-router-dom";
 
-const Layout = () => {
+const Layout: React.FC = () => {
   return (
-    <>
-    <header>
+    <div className="app-container">
+      <header className="app-header">
         <Header />
-    </header>
-    <body>
+      </header>
+      <main className="app-main">
         <Outlet />
-    </body>
-      
-    </>
-  )
+      </main>
+    </div>
+  );
 };
 
 export default Layout;
