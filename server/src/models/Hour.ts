@@ -3,7 +3,7 @@ import { Schema, type Document } from 'mongoose';
 interface IHour extends Document {
     startDate: String;
     endDate: String;
-    loggedTime: Number;
+    loggedTime: String;
     status: String
 }
 
@@ -17,7 +17,7 @@ const hourSchema = new Schema<IHour>({
         required: false,
     },
     loggedTime: {
-        type: Number,
+        type: String,
         required: false,
     },
     status: {

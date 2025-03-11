@@ -26,7 +26,7 @@
       "hours": [{
         "startDate": "01/12/2024",
         "endDate": "01/13/2024",
-        "loggedTime": 6,
+        "loggedTime": "6",
         "status": "Billed"
       }]
     }]

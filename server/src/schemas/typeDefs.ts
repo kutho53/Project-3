@@ -17,10 +17,49 @@ const typeDefs = `
   }
 
   type Hour {
+    _id: ID!
     startDate: String
     endDate: String
-    loggedTime: Number
+    loggedTime: String
     status: String
+  }
+  
+  input UserInput {
+    userName: String
+    password: String
+  }
+
+  input IClient {
+    firstName: String
+    lastName: String
+    buisnessName: String
+    phoneNumber: String
+    email: String
+  }
+
+  input ClientInput {
+    user_id: String
+    client_id: String
+    client: IClient
+  }
+
+  input IHour {
+    startDate: String
+    endDate: String
+    loggedTime: String
+    status: String
+  }
+
+  input HourInput {
+    user_id: String
+    client_id: String
+    hour: IHour
+  }
+
+  input DeleteInput {
+    user_id: String
+    client_id: String
+    hour_id: String
   }
 
   type Query {
@@ -28,7 +67,16 @@ const typeDefs = `
     me(_id: ID!): User
   }
 
-  
+  type Mutation {
+    addUser(input: UserInput ): User
+    addClient(input: ClientInput): User
+    updateClient(input: ClientInput): User
+    removeClient(input: DeleteInput): User
+    addHour(input: HourInput): User
+    removeHour(input: DeleteInput): User
+    removeAllHours(input: DeleteInput): User
+  }
+ 
 `;
 
 export default typeDefs;
