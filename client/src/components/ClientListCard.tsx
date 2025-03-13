@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import * as Interfaces from '../utils/types';
-import { UPDATE_CLIENT } from '../utils/mutations';
+import { REMOVE_CLIENT, UPDATE_CLIENT } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
 
 
@@ -10,6 +10,10 @@ const ClientsList: React.FC<Interfaces.IncomingArgProps> = ({ onClientUpdated, c
   const { userId } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   let [updatedClientId, setUpdatedClientId] = useState('');
+  let [deleteClientId, setDeleteClientId] = useState('');
+
+  const [createClient, { loading: creating }] = useMutation(UPDATE_CLIENT);
+  const [deleteClient] = useMutation(REMOVE_CLIENT)
 
   if (!clients.length) {
     return <h3>No Clients Yet</h3>;
@@ -22,7 +26,6 @@ const ClientsList: React.FC<Interfaces.IncomingArgProps> = ({ onClientUpdated, c
     phoneNumber: "",
     email: ""
   });
-  const [createClient, { loading: creating }] = useMutation(UPDATE_CLIENT);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -55,6 +58,23 @@ const ClientsList: React.FC<Interfaces.IncomingArgProps> = ({ onClientUpdated, c
     }
   };
 
+  const handleDeleteClient = async () => {
+    try {
+      await deleteClient({
+        variables: {
+          input: {
+            user_id: `${userId}`,
+            client_id: deleteClientId
+          }
+        },
+      });
+
+      onClientUpdated();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <div>
       <div className='row row-cols-1 row-cols-md-3 g-4'>
@@ -82,13 +102,21 @@ const ClientsList: React.FC<Interfaces.IncomingArgProps> = ({ onClientUpdated, c
                   >
                     Edit
                   </button>
+                  <button
+                    type='button'
+                    className="btn btn-danger card-link"
+                    onClick={() => {handleDeleteClient(), setDeleteClientId(client._id)}}
+                  >
+                    Delete
+                  </button>
 
                 </div>
               </div>
             </div>
           ))}
-        {/* Add Client Modal */}
-        {isModalOpen && (
+      </div>
+              {/* Add Client Modal */}
+              {isModalOpen && (
           <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
               <h2>Edit Client</h2>
@@ -149,7 +177,7 @@ const ClientsList: React.FC<Interfaces.IncomingArgProps> = ({ onClientUpdated, c
                   />
                 </div>
                 <div className="modal-buttons">
-                  <button type="submit" disabled={creating}>{creating ? 'Creating...' : 'Create Client'}</button>
+                  <button type="submit" disabled={creating}>{creating ? 'Updating...' : 'Edit Client'}</button>
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
@@ -162,7 +190,6 @@ const ClientsList: React.FC<Interfaces.IncomingArgProps> = ({ onClientUpdated, c
             </div>
           </div>
         )}
-      </div>
     </div>
   );
 };

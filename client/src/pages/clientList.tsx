@@ -76,7 +76,7 @@ const ClientList: React.FC = () => {
           <div className='col-4'>
             <button
               type='button'
-              className="btn btn-secondary"
+              className="btn btn-success"
               onClick={() => setIsModalOpen(true)}
             >
               Add New Client

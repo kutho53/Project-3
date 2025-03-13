@@ -9,9 +9,7 @@ const HoursList: React.FC<Interfaces.HoursList> = ({ onHourUpdated, hours = [] }
   const { userId, clientId } = useParams();
   const [updatedHourId, setUpdatedHourId] = useState('');
 
-  if (!hours.length) {
-    return <h3>No hours logged</h3>;
-  }
+ 
   const [DeleteHour] = useMutation(REMOVE_HOUR);
 
   const handleDeleteHour = async () => {
@@ -21,7 +19,7 @@ const HoursList: React.FC<Interfaces.HoursList> = ({ onHourUpdated, hours = [] }
           input: {
             user_id: `${userId}`,
             client_id: `${clientId}`,
-            hour: updatedHourId
+            hour_id: updatedHourId
           }
         },
       });
@@ -44,11 +42,11 @@ const HoursList: React.FC<Interfaces.HoursList> = ({ onHourUpdated, hours = [] }
                     {hour.startDate} - {hour.endDate} <br />
                   </h4>
                   {/* Add Hour Modal */}
-                  <h6 className='card-subtitle mb-2 text-body-secondary'>{hour.loggedTime}</h6>
-                  <p className='card-text'>Most recent hour logged: </p>
+                  <h5 className='card-subtitle mb-2 text-body-secondary'>{hour.loggedTime} hours logged</h5>
+                  <p className='card-text'>status: {hour.status}</p>
                   <button
                     type='button'
-                    className="btn btn-secondary card-link"
+                    className="btn btn-danger card-link"
                     onClick={() => {handleDeleteHour(), setUpdatedHourId(hour._id)}}
                   >
                     delete
