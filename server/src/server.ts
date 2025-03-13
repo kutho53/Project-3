@@ -25,7 +25,13 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
-  app.use(cors())
+  // app.use(cors())
+  app.use(cors({
+    origin: process.env.NODE_ENV === 'production'
+      ? 'https://your-render-frontend-url.onrender.com'
+      : 'http://localhost:5173',
+    credentials: true
+  }));
 
   // Important for MERN Setup: Any client-side requests that begin with '/graphql' will be handled by our Apollo Server
   app.use('/graphql', expressMiddleware(server as any,

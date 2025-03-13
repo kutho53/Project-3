@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: import.meta.env.VITE_API_URL || 'http://localhost:3001/graphql',
 });
 
 // const httpLink = createHttpLink({
