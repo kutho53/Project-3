@@ -5,9 +5,11 @@ import path from 'node:path';
 import cors from 'cors';
 import { typeDefs, resolvers } from './schemas/index.js';
 import db from './config/connection.js';
+import { authenticateToken } from './utils/auth.js';
 
-const PORT = process.env.PORT || 3001;
-const app = express();
+  // const PORT = process.env.PORT || 3001;
+  // const app = express();
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -17,10 +19,20 @@ const startApolloServer = async () => {
   await server.start();
   await db();
 
+  const PORT = process.env.PORT || 3001;
+  const app = express();
+
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
   app.use(cors())
+
+  // Important for MERN Setup: Any client-side requests that begin with '/graphql' will be handled by our Apollo Server
+  app.use('/graphql', expressMiddleware(server as any,
+    {
+      context: authenticateToken as any
+    }
+  ));
 
   // Important for MERN Setup: When our application runs from production, it functions slightly differently than in development
   // In development, we run two servers concurrently that work together
@@ -32,9 +44,6 @@ const startApolloServer = async () => {
       res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
   }
-
-  // Important for MERN Setup: Any client-side requests that begin with '/graphql' will be handled by our Apollo Server
-  app.use('/graphql', expressMiddleware(server));
 
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);

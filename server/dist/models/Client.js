@@ -1,16 +1,6 @@
-import { Schema, type Document } from 'mongoose';
+import { Schema } from 'mongoose';
 import hourSchema from './Hour.js';
-
-interface IClient extends Document {
-    firstName: string;
-    lastName: string;
-    buisnessName: string;
-    phoneNumber: string;
-    email: string;
-    hours: [];
-}
-
-const clientSchema = new Schema<IClient>({
+const clientSchema = new Schema({
     firstName: {
         type: String,
         required: false,
@@ -34,5 +24,5 @@ const clientSchema = new Schema<IClient>({
     },
     hours: [hourSchema]
 });
-
 export default clientSchema;
+//# sourceMappingURL=Client.js.map

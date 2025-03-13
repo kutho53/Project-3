@@ -1,8 +1,9 @@
 [
   {
     "_id": "68c48563a98e70171707b0ed",
-    "userName": "Brian Kernighan",
-    "password": "passExample",
+    "userName": "Brian.Kernighan",
+    "email": "BK@email.com",
+    "password": "test1",
     "clients": [{
       "_id": "99c48563a98e70171707b5ed",
       "firstName": "Joe",
@@ -14,8 +15,9 @@
   },
   {
     "_id": "99c48563a98e70171707b090",
-    "userName": "joseph daniel",
-    "password": "passExample1111",
+    "userName": "Joseph.Daniel",
+    "email": "JD@email.com",
+    "password": "test2",
     "clients": [{
       "_id": "90c48563a98e90871707b5ed",
       "firstName": "bill",

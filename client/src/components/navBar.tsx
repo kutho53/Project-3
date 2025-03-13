@@ -4,8 +4,9 @@
         // generates a pop up with text entry boxes for "name", "phone number", and "email address"
     //Possibly include search bar that can search for clients by name
 
-    import { Link } from "react-router-dom";
     import { useState, useEffect } from "react";
+    import { type MouseEvent} from 'react';
+    import Auth from '../utils/auth';
     
     export default function NavBar(){
         const [searchTerm, setSearchTerm] = useState("");
@@ -39,6 +40,11 @@
             document.addEventListener('click', handleClickOutside);
             return () => document.removeEventListener('click', handleClickOutside);
         }, []);
+
+        const logout = (event: MouseEvent<HTMLButtonElement>) => {
+            event.preventDefault();
+            Auth.logout();
+          };
     
         return(
            <nav className="navbar">
@@ -78,7 +84,7 @@
                         </div>
                     )}
                 </div>
-                <Link to='/' className="nav-home">Sign Out</Link>
+                <button type="button" onClick={logout} className="btn nav-home">Sign Out</button>
            </nav> 
         )
     }

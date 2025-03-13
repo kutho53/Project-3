@@ -140,10 +140,14 @@ export const REMOVE_ALL_HOURS = gql`
 `;
 
 export const LOGIN = gql`
-    mutation Me($id: ID!) {
-        login(_id: $id) {
-            _id
-            userName
+    mutation Login($input: LoginInput!) {
+        login(input: $input) {
+            token
+            user {
+                _id
+                userName
+                email
+            }
         }
     }
 `; 

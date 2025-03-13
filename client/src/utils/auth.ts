@@ -1,16 +1,6 @@
 import { type JwtPayload, jwtDecode } from 'jwt-decode';
 
-interface ExtendedJwt extends JwtPayload {
-  data:{
-    userName:string,
-    _id:string
-  }
-};
-
 class AuthService {
-  getUser() {
-    return jwtDecode<ExtendedJwt>(this.getToken());
-  }
 
   loggedIn() {
     const token = this.getToken();
@@ -36,7 +26,6 @@ class AuthService {
 
   login(idToken: string) {
     localStorage.setItem('id_token', idToken);
-    window.location.assign('/');
   }
 
   logout() {

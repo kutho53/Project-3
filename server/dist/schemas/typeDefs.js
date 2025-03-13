@@ -92,5 +92,5 @@ const typeDefs = `
   }
  
 `;
-
 export default typeDefs;
+//# sourceMappingURL=typeDefs.js.map

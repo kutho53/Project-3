@@ -1,0 +1,36 @@
+[
+    {
+        "_id": "68c48563a98e70171707b0ed",
+        "userName": "Brian.Kernighan",
+        "email": "BK@email.com",
+        "password": "test1",
+        "clients": [{
+                "_id": "99c48563a98e70171707b5ed",
+                "firstName": "Joe",
+                "lastName": "Doe",
+                "buisnessName": "Joe Hardware",
+                "phoneNumber": "123-345-6454",
+                "email": "joeDoe@email.com"
+            }]
+    },
+    {
+        "_id": "99c48563a98e70171707b090",
+        "userName": "Joseph.Daniel",
+        "email": "JD@email.com",
+        "password": "test2",
+        "clients": [{
+                "_id": "90c48563a98e90871707b5ed",
+                "firstName": "bill",
+                "lastName": "watson",
+                "buisnessName": "watson Hardware",
+                "phoneNumber": "123-345-6454",
+                "email": "wh@email.com",
+                "hours": [{
+                        "startDate": "01/12/2024",
+                        "endDate": "01/13/2024",
+                        "loggedTime": "6",
+                        "status": "Billed"
+                    }]
+            }]
+    }
+]
