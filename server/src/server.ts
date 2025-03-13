@@ -2,7 +2,7 @@ import express from 'express';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import path from 'node:path';
-
+import cors from 'cors';
 import { typeDefs, resolvers } from './schemas/index.js';
 import db from './config/connection.js';
 
@@ -19,6 +19,8 @@ const startApolloServer = async () => {
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
+
+  app.use(cors())
 
   // Important for MERN Setup: When our application runs from production, it functions slightly differently than in development
   // In development, we run two servers concurrently that work together

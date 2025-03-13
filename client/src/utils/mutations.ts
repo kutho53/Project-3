@@ -21,13 +21,6 @@ export const ADD_CLIENT = gql`
                 buisnessName
                 email
                 phoneNumber
-                hours {
-                    _id
-                    startDate
-                    endDate
-                    loggedTime
-                    status
-                }
             }
         }
     }
@@ -45,13 +38,6 @@ export const UPDATE_CLIENT = gql`
                 buisnessName
                 email
                 phoneNumber
-                hours {
-                    _id
-                    startDate
-                    endDate
-                    loggedTime
-                    status
-                }
             }
         }
     }
@@ -152,3 +138,12 @@ export const REMOVE_ALL_HOURS = gql`
         }
     }
 `;
+
+export const LOGIN = gql`
+    mutation Me($id: ID!) {
+        login(_id: $id) {
+            _id
+            userName
+        }
+    }
+`; 

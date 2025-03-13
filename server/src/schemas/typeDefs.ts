@@ -68,6 +68,7 @@ const typeDefs = `
   }
 
   type Mutation {
+    login(_id: ID!): User
     addUser(input: UserInput ): User
     addClient(input: ClientInput): User
     updateClient(input: ClientInput): User
