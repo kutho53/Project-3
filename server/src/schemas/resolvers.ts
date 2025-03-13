@@ -15,6 +15,9 @@ const resolvers = {
 
   //https://www.mongodb.com/docs/manual/reference/operator as reference
   Mutation: {
+    login: async (_parent: unknown, { _id }: Interfaces.UserArgs) => {
+      return await User.findOne({ _id: _id });
+    },
     addUser: async (_parent: unknown, { input }: Interfaces.AddUserArgs) => {
       return await User.create({ ...input });
     },
@@ -34,7 +37,7 @@ const resolvers = {
       );
     },
     updateClient: async (_parent: unknown, { input }: Interfaces.AddClientArgs) => {
-      return await User.updateOne(
+      return await User.findOneAndUpdate(
         //searches for the user by user_id and the specific client we want to update by client_id
         { _id: input.user_id, "clients._id":input.client_id },
         //uses MongoDB $set to replace that specifc objects fields without creating new _id and resetting hours[]

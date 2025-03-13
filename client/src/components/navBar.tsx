@@ -11,13 +11,7 @@
         const [searchTerm, setSearchTerm] = useState("");
         const [searchResults, setSearchResults] = useState<string[]>([]);
         const [isSearching, setIsSearching] = useState(false);
-        const [isModalOpen, setIsModalOpen] = useState(false);
-        const [newClient, setNewClient] = useState({
-            name: "",
-            phone: "",
-            email: ""
-        });
-    
+        
         // Placeholder client data - replace this with your actual client data
         const dummyClients = [
             "John Doe",
@@ -39,23 +33,6 @@
             setSearchResults(filteredResults);
         };
     
-        const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            const { name, value } = e.target;
-            setNewClient(prev => ({
-                ...prev,
-                [name]: value
-            }));
-        };
-    
-        const handleSubmit = (e: React.FormEvent) => {
-            e.preventDefault();
-            // Here you would typically send the data to your backend
-            console.log('New Client Data:', newClient);
-            // Reset form and close modal
-            setNewClient({ name: "", phone: "", email: "" });
-            setIsModalOpen(false);
-        };
-    
         // Close search results when clicking outside
         useEffect(() => {
             const handleClickOutside = () => setIsSearching(false);
@@ -65,7 +42,6 @@
     
         return(
            <nav className="navbar">
-                <Link to='/' className="nav-home">Home</Link>
                 <div className="search-container">
                     <input
                         type="search"
@@ -102,66 +78,7 @@
                         </div>
                     )}
                 </div>
-                <button 
-                    className="add-client-btn"
-                    onClick={() => setIsModalOpen(true)}
-                >
-                    Add New Client
-                </button>
-    
-                {/* Add Client Modal */}
-                {isModalOpen && (
-                    <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
-                        <div className="modal-content" onClick={e => e.stopPropagation()}>
-                            <h2>Add New Client</h2>
-                            <form onSubmit={handleSubmit}>
-                                <div className="form-group">
-                                    <label htmlFor="name">Name:</label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        value={newClient.name}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="phone">Phone Number:</label>
-                                    <input
-                                        type="tel"
-                                        id="phone"
-                                        name="phone"
-                                        value={newClient.phone}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="email">Email Address:</label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        value={newClient.email}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </div>
-                                <div className="modal-buttons">
-                                    <button type="submit">Add Client</button>
-                                    <button 
-                                        type="button" 
-                                        onClick={() => setIsModalOpen(false)}
-                                        className="cancel-btn"
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                )}
+                <Link to='/' className="nav-home">Sign Out</Link>
            </nav> 
         )
     }
