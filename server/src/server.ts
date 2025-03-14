@@ -9,7 +9,7 @@ import { authenticateToken } from './utils/auth.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-// fixes _dirname error
+//fixes dirname error
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -36,7 +36,6 @@ const startApolloServer = async () => {
     credentials: true
   }));
 
-
   app.use('/graphql', expressMiddleware(server as any,
     {
       context: authenticateToken as any
@@ -47,10 +46,10 @@ const startApolloServer = async () => {
   // In development, we run two servers concurrently that work together
   // In production, our Node server runs and delivers our client-side bundle from the dist/ folder
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/dist')));
+    app.use(express.static(path.join(__dirname, '../../client/dist')));
 
     app.get('*', (_req, res) => {
-      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+      res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
     });
   }
 
