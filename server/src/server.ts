@@ -6,9 +6,12 @@ import cors from 'cors';
 import { typeDefs, resolvers } from './schemas/index.js';
 import db from './config/connection.js';
 import { authenticateToken } from './utils/auth.js';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-  // const PORT = process.env.PORT || 3001;
-  // const app = express();
+//fixes dirname error
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const server = new ApolloServer({
   typeDefs,
@@ -33,7 +36,6 @@ const startApolloServer = async () => {
     credentials: true
   }));
 
-  // Important for MERN Setup: Any client-side requests that begin with '/graphql' will be handled by our Apollo Server
   app.use('/graphql', expressMiddleware(server as any,
     {
       context: authenticateToken as any
@@ -44,10 +46,10 @@ const startApolloServer = async () => {
   // In development, we run two servers concurrently that work together
   // In production, our Node server runs and delivers our client-side bundle from the dist/ folder
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/dist')));
+    app.use(express.static(path.join(__dirname, '../../client/dist')));
 
     app.get('*', (_req, res) => {
-      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+      res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
     });
   }
 
