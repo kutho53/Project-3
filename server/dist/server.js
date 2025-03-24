@@ -22,7 +22,7 @@ const startApolloServer = async () => {
     // app.use(cors())
     app.use(cors({
         origin: process.env.NODE_ENV === 'production'
-            ? 'https://your-render-frontend-url.onrender.com'
+            ? 'https://project-3-cxos.onrender.com/'
             : 'http://localhost:5173',
         credentials: true
     }));
