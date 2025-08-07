@@ -11,7 +11,7 @@ export const fake_me_query = {
     data: {
       me: {
         _id: "99c48563a98e70171707b090",
-        userName: "joseph daniel",
+        userName: "joseph daniels",
         clients: [
           {
             _id: "90c48563a98e90871707b5ed",
