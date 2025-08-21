@@ -4,7 +4,7 @@ export default function Header(){
     return(
         <header className='app-header'>
             <div>
-                <h1>Hours Tracker</h1>
+                <h1>Hours Log</h1>
             </div>
             <nav>
                 <NavBar/>
